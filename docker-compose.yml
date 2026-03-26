@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    container_name: scrapper-api
+    ports:
+      - "5049:5049"
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - CAPTCHA_API_KEY=${CAPTCHA_API_KEY}
+      - HEADLESS=${HEADLESS:-false}
+    volumes:
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    restart: unless-stopped

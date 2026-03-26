@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "handlers": {
+    "console": {
+      "class": "app.config.log.RichHandlerWrapper",
+      "level": "DEBUG",
+      "show_time": true,
+      "log_time_format": "[%H:%M:%S]",
+      "omit_repeated_times": false,
+      "rich_tracebacks": true,
+      "tracebacks_show_locals": false
+    },
+    "jsonl": {
+      "class": "app.config.log.JsonlHandler",
+      "level": "WARNING",
+      "log_dir": "logs"
+    }
+  },
+  "root": {
+    "level": "WARNING",
+    "handlers": [
+      "console",
+      "jsonl"
+    ]
+  },
+  "loggers": {
+    "app": {
+      "level": "DEBUG",
+      "handlers": [
+        "console",
+        "jsonl"
+      ],
+      "propagate": false
+    },
+    "uvicorn": {
+      "level": "WARNING",
+      "propagate": false
+    },
+    "uvicorn.access": {
+      "level": "WARNING",
+      "propagate": false
+    },
+    "uvicorn.error": {
+      "level": "ERROR",
+      "propagate": false
+    },
+    "asyncio": {
+      "level": "WARNING",
+      "propagate": false
+    },
+    "fastapi": {
+      "level": "ERROR",
+      "propagate": false
+    },
+    "fastapi.error.request_validation": {
+      "level": "CRITICAL",
+      "propagate": false
+    }
+  }
+}
+
