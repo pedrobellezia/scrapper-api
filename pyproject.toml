@@ -10,14 +10,9 @@ dependencies = [
     "fastapi",
     "playwright",
     "pydantic",
-    "pytz",
     "rich",
     "uvicorn",
     "python-multipart",
     "reportlab>=4.4.10",
-    "pypdf>=6.9.2",
-    "python-docx>=1.2.0",
-    "docx2pdf>=0.1.8",
-    "beautifulsoup4>=4.14.3",
-    "weasyprint>=68.1",
+    "pypdf>=6.9.2"
 ]
