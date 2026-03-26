@@ -66,8 +66,6 @@ class Estadual:
             logger.info(f"Estadual SP scrape completed for CNPJ: {cnpj}")
             return pdf_bytes
 
-        except ScrapError:
-            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
@@ -159,8 +157,6 @@ class Estadual:
 
             return pdf_bytes
 
-        except ScrapError:
-            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(

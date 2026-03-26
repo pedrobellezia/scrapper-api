@@ -52,12 +52,10 @@ class Trabalhista:
             logger.info(f"Trabalhista scrape completed for CNPJ: {cnpj}")
             return pdf_buffer
 
-        except ScrapError:
-            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Trabalhista",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Trabalhista",
                 details=e.message,
@@ -65,7 +63,7 @@ class Trabalhista:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Trabalhista",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Trabalhista",
                 url=page.url,

@@ -35,7 +35,7 @@ class Fgts:
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do FGTS",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="FGTS",
                 details=e.message,

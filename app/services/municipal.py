@@ -124,11 +124,10 @@ class Municipal:
             logger.info(f"Municipal SC/Blumenau scrape completed for CNPJ: {cnpj}")
             return pdf_bytes
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Blumenau",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Blumenau",
                 details=e.message,
@@ -136,7 +135,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Blumenau",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Blumenau",
                 url=page.url,
@@ -159,11 +158,10 @@ class Municipal:
             logger.info(f"Municipal SC/Florianopolis scrape completed for CNPJ: {cnpj}")
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Florianopolis",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Florianopolis",
                 details=e.message,
@@ -171,7 +169,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Florianopolis",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Florianopolis",
                 url=page.url,
@@ -192,11 +190,10 @@ class Municipal:
             logger.info(f"Municipal SC/Lages scrape completed for CNPJ: {cnpj}")
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Lages",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Lages",
                 details=e.message,
@@ -204,7 +201,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Lages",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Lages",
                 url=page.url,
@@ -229,11 +226,10 @@ class Municipal:
             )
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Braco do Norte",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Braco do Norte",
                 details=e.message,
@@ -241,7 +237,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Braco do Norte",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Braco do Norte",
                 url=page.url,
@@ -262,11 +258,10 @@ class Municipal:
             logger.info(f"Municipal SC/Criciuma scrape completed for CNPJ: {cnpj}")
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Criciuma",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Criciuma",
                 details=e.message,
@@ -274,7 +269,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Criciuma",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Criciuma",
                 url=page.url,
@@ -308,11 +303,10 @@ class Municipal:
 
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Itapema",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Itapema",
                 details=e.message,
@@ -320,7 +314,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Itapema",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Itapema",
                 url=page.url,
@@ -360,11 +354,10 @@ class Municipal:
 
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Camboriu",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Camboriu",
                 details=e.message,
@@ -372,7 +365,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Camboriu",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Camboriu",
                 url=page.url,
@@ -412,11 +405,10 @@ class Municipal:
 
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Joinville",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Joinville",
                 details=e.message,
@@ -424,7 +416,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Joinville",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Joinville",
                 url=page.url,
@@ -531,11 +523,10 @@ class Municipal:
 
             return out.getvalue()
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SP/Sao Paulo",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SP/Sao Paulo",
                 details=e.message,
@@ -543,7 +534,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SP/Sao Paulo",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SP/Sao Paulo",
                 url=page.url,
@@ -577,11 +568,10 @@ class Municipal:
 
             return pdf_buffer
 
-        
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
-                message="Timeout durante Scrap do Municipal SC/Icara",
+                message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Icara",
                 details=e.message,
@@ -589,7 +579,7 @@ class Municipal:
             ) from e
         except Exception as e:
             raise ScrapError(
-                message="Erro inesperado durante Scrap do Municipal SC/Icara",
+                message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
                 tipo_cnd="Municipal SC/Icara",
                 url=page.url,
