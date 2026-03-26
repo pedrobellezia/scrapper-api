@@ -3,6 +3,7 @@ from pathlib import Path
 from datetime import datetime
 import json
 import traceback
+from rich.console import Console
 from rich.logging import RichHandler
 from rich.traceback import install as install_traceback
 import logging
@@ -13,7 +14,8 @@ install_traceback()
 
 class RichHandlerWrapper(RichHandler):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        console = Console(width=160)
+        super().__init__(console=console, **kwargs)
 
 
 class JsonlHandler(logging.Handler):
