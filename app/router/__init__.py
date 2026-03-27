@@ -1,3 +1,3 @@
-from . import trabalhista, fgts, estadual, municipal
+from . import trabalhista, fgts, estadual, municipal, log
 
-__all__ = ["trabalhista", "fgts", "estadual", "municipal"]
+__all__ = ["trabalhista", "fgts", "estadual", "municipal", "log"]

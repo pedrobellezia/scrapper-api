@@ -16,12 +16,13 @@ def add_exceptions_handlers(app: FastAPI):
 
 
 def add_routes(app: FastAPI):
-    from app.router import trabalhista, fgts, estadual, municipal
+    from app.router import trabalhista, fgts, estadual, municipal, log as lg
 
     app.include_router(trabalhista.router)
     app.include_router(fgts.router)
     app.include_router(estadual.router)
     app.include_router(municipal.router)
+    app.include_router(lg.router)
 
 
 def add_middlewares(app: FastAPI):

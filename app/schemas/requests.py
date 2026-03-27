@@ -1,4 +1,13 @@
 from pydantic import BaseModel, field_validator, ConfigDict, StrictStr
+from typing import Optional, List
+from enum import Enum
+from datetime import datetime
+
+
+class LogLevel(str, Enum):
+    INFO = "info"
+    WARN = "warn"
+    ERROR = "error"
 
 
 class BaseCndRequest(BaseModel):
@@ -29,3 +38,27 @@ class MunicipalRequest(EstadualRequest):
     def validate_municipio(cls, v: str) -> str:
         v = "".join(filter(str.isalpha, v))
         return v.lower().strip().replace(" ", "_")
+
+
+class LogFilter(BaseModel):
+    tipo_cnd: Optional[List[StrictStr]] = []
+    cnpj: Optional[List[StrictStr]] = []
+    error_type: Optional[List[StrictStr]] = []
+    level: Optional[List[LogLevel]] = []
+    init_date: Optional[StrictStr] = None
+    end_date: Optional[StrictStr] = None
+
+    @field_validator("init_date", "end_date")
+    @classmethod
+    def validate_date(cls, v: Optional[str]):
+        if v is None:
+            return v
+
+        try:
+            datetime.strptime(v, "%d-%m-%Y")
+        except ValueError:
+            raise ValueError("Date must be in format DD-MM-YYYY")
+
+        return v
+
+    model_config = ConfigDict(extra="forbid")

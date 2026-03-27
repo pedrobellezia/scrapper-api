@@ -8,7 +8,6 @@ from app.config import (
     setup_logging,
 )
 from app.config import add_routes, add_exceptions_handlers, add_middlewares
-from fastapi.staticfiles import StaticFiles
 
 setup_logging()
 
