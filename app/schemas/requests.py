@@ -5,9 +5,9 @@ from datetime import datetime
 
 
 class LogLevel(str, Enum):
-    INFO = "info"
-    WARN = "warn"
-    ERROR = "error"
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
 
 
 class BaseCndRequest(BaseModel):
@@ -59,6 +59,13 @@ class LogFilter(BaseModel):
         except ValueError:
             raise ValueError("Date must be in format DD-MM-YYYY")
 
+        return v
+
+    @field_validator("level", mode="before")
+    @classmethod
+    def normalize_level(cls, v):
+        if isinstance(v, list):
+            return [item.upper() if isinstance(item, str) else item for item in v]
         return v
 
     model_config = ConfigDict(extra="forbid")

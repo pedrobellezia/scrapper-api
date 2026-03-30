@@ -66,7 +66,7 @@ async def show_log(data: LogFilter):
         with open(file_path, "r", encoding="utf-8") as f:
             for line in f:
                 bar = json.loads(line)
-                if not (
+                if (
                     (bar.get("level", None) in data.level or not data.level)
                     and (bar.get("cnpj", None) in data.cnpj or not data.cnpj)
                     and (
