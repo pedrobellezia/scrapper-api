@@ -66,6 +66,8 @@ class Estadual:
             logger.info(f"Estadual SP scrape completed for CNPJ: {cnpj}")
             return pdf_bytes
 
+        except CaptchaError:
+            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
@@ -139,7 +141,7 @@ class Estadual:
                     await popup.emulate_media(media="print")
                     return await popup.pdf()
 
-            except PlaywrightTimeout as e:
+            except PlaywrightTimeout:
                 e: PlaywrightTimeout
                 link = page.locator('//ul[@class="sat-vs-success"]/li[3]/a')
 
@@ -157,6 +159,8 @@ class Estadual:
 
             return pdf_bytes
 
+        except CaptchaError:
+            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(

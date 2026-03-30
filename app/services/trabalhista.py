@@ -52,6 +52,8 @@ class Trabalhista:
             logger.info(f"Trabalhista scrape completed for CNPJ: {cnpj}")
             return pdf_buffer
 
+        except CaptchaError:
+            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(

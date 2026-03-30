@@ -124,6 +124,8 @@ class Municipal:
             logger.info(f"Municipal SC/Blumenau scrape completed for CNPJ: {cnpj}")
             return pdf_bytes
 
+        except CaptchaError:
+            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
@@ -523,6 +525,8 @@ class Municipal:
 
             return out.getvalue()
 
+        except CaptchaError:
+            raise
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
             raise ScrapError(
