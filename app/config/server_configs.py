@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from starlette.middleware.cors import CORSMiddleware
 
 from app.exceptions import ScrapError
 from app.exceptions.handlers import (
@@ -29,3 +30,9 @@ def add_middlewares(app: FastAPI):
     from app.config.middlewares import auth
 
     app.middleware("http")(auth)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
