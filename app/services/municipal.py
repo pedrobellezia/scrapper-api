@@ -103,7 +103,7 @@ class Municipal:
                 raise CaptchaError(
                     result.get("error") or CaptchaError.default_message,
                     cnpj=cnpj,
-                    tipo_cnd="Municipal SC/Blumenau",
+                    tipo_cnd="Municipal - SC/Blumenau",
                 )
 
             await page.locator(
@@ -131,7 +131,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Blumenau",
+                tipo_cnd="Municipal - SC/Blumenau",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -139,7 +139,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Blumenau",
+                tipo_cnd="Municipal - SC/Blumenau",
                 url=page.url,
             ) from e
 
@@ -165,7 +165,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Florianopolis",
+                tipo_cnd="Municipal - SC/Florianopolis",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -173,7 +173,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Florianopolis",
+                tipo_cnd="Municipal - SC/Florianopolis",
                 url=page.url,
             ) from e
 
@@ -197,7 +197,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Lages",
+                tipo_cnd="Municipal - SC/Lages",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -205,7 +205,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Lages",
+                tipo_cnd="Municipal - SC/Lages",
                 url=page.url,
             ) from e
 
@@ -233,7 +233,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Braco do Norte",
+                tipo_cnd="Municipal - SC/Braco do Norte",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -241,7 +241,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Braco do Norte",
+                tipo_cnd="Municipal - SC/Braco do Norte",
                 url=page.url,
             ) from e
 
@@ -265,7 +265,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Criciuma",
+                tipo_cnd="Municipal - SC/Criciuma",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -273,7 +273,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Criciuma",
+                tipo_cnd="Municipal - SC/Criciuma",
                 url=page.url,
             ) from e
 
@@ -310,7 +310,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Itapema",
+                tipo_cnd="Municipal - SC/Itapema",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -318,7 +318,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Itapema",
+                tipo_cnd="Municipal - SC/Itapema",
                 url=page.url,
             ) from e
 
@@ -361,7 +361,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Camboriu",
+                tipo_cnd="Municipal - SC/Camboriu",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -369,7 +369,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Camboriu",
+                tipo_cnd="Municipal - SC/Camboriu",
                 url=page.url,
             ) from e
 
@@ -412,7 +412,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Joinville",
+                tipo_cnd="Municipal - SC/Joinville",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -420,7 +420,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Joinville",
+                tipo_cnd="Municipal - SC/Joinville",
                 url=page.url,
             ) from e
 
@@ -457,7 +457,7 @@ class Municipal:
                 raise CaptchaError(
                     result_1.get("error") or CaptchaError.default_message,
                     cnpj=cnpj,
-                    tipo_cnd="Municipal SP/Sao Paulo",
+                    tipo_cnd="Municipal - SP/Sao Paulo",
                 )
 
             await asyncio.sleep(random.uniform(1, 2))
@@ -473,7 +473,7 @@ class Municipal:
                 raise CaptchaError(
                     result_2.get("error") or CaptchaError.default_message,
                     cnpj=cnpj,
-                    tipo_cnd="Municipal SP/Sao Paulo",
+                    tipo_cnd="Municipal - SP/Sao Paulo",
                 )
 
             async with page.expect_download(timeout=30_000) as dl:
@@ -532,7 +532,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SP/Sao Paulo",
+                tipo_cnd="Municipal - SP/Sao Paulo",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -540,7 +540,7 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SP/Sao Paulo",
+                tipo_cnd="Municipal - SP/Sao Paulo",
                 url=page.url,
             ) from e
 
@@ -577,7 +577,7 @@ class Municipal:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Icara",
+                tipo_cnd="Municipal - SC/Icara",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -585,6 +585,6 @@ class Municipal:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Municipal SC/Icara",
+                tipo_cnd="Municipal - SC/Icara",
                 url=page.url,
             ) from e

@@ -73,7 +73,7 @@ class Estadual:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Estadual SP",
+                tipo_cnd="Estadual - SP",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -81,7 +81,7 @@ class Estadual:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Estadual SP",
+                tipo_cnd="Estadual - SP",
                 url=page.url,
             ) from e
 
@@ -105,7 +105,7 @@ class Estadual:
                 raise CaptchaError(
                     result.get("error") or CaptchaError.default_message,
                     cnpj=cnpj,
-                    tipo_cnd="Estadual SC",
+                    tipo_cnd="Estadual - SC",
                 )
 
             await page.locator(
@@ -166,7 +166,7 @@ class Estadual:
             raise ScrapError(
                 message="Timeout durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Estadual SC",
+                tipo_cnd="Estadual - SC",
                 details=e.message,
                 url=page.url,
             ) from e
@@ -174,6 +174,6 @@ class Estadual:
             raise ScrapError(
                 message="Erro inesperado durante Scrap da CND",
                 cnpj=cnpj,
-                tipo_cnd="Estadual SC",
+                tipo_cnd="Estadual - SC",
                 url=page.url,
             ) from e

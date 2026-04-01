@@ -14,5 +14,6 @@ dependencies = [
     "uvicorn",
     "python-multipart",
     "reportlab>=4.4.10",
-    "pypdf>=6.9.2"
+    "pypdf>=6.9.2",
+    "playwright-stealth>=2.0.2",
 ]

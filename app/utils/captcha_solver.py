@@ -30,17 +30,31 @@ class CaptchaSolver:
                 O XPath para localizar os iframes de reCAPPTCHA.
                 Default: "//iframe[@title='reCAPTCHA']"
         """
-        key_list: List[str] = []
         if not x_path:
             x_path = "//iframe[@title='reCAPTCHA']"
 
-        iframe_list = await self.page.locator(x_path).all()
+        locator = self.page.locator(x_path)
 
-        for i in iframe_list:
-            src = await i.get_attribute("src")
-            if src:
-                key = parse_qs(urlparse(src).query).get("k")
-                key_list.append(key[0] if key else None)
+        try:
+            await locator.first.wait_for(timeout=30000)
+        except TimeoutError:
+            return []
+
+        elements = await locator.all()
+
+        key_list: List[str] = []
+
+        for el in elements:
+            src = await el.get_attribute("src")
+            if not src:
+                continue
+
+            query = parse_qs(urlparse(src).query)
+            key = query.get("k")
+
+            if key and key[0]:
+                key_list.append(key[0])
+
         return key_list
 
     async def auto_solve_v2(self) -> dict:

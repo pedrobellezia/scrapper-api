@@ -11,6 +11,8 @@ class Fgts:
         try:
             logger.info(f"Starting FGTS scrape for CNPJ: {cnpj}")
 
+            raise Exception
+
             await page.goto(Fgts.URL, wait_until="domcontentloaded", timeout=30_000)
 
             await page.locator("//input[@id='mainForm:txtInscricao1']").fill(cnpj)

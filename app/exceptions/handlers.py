@@ -67,7 +67,7 @@ async def handle_scrap_error(_: Request, exc: ScrapError) -> JSONResponse:
 
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.message, "error": exc.error_code},
+        content={"detail": exc.message, "error": exc.error_code, "cnd_type": exc.tipo_cnd, "cnpj": exc.cnpj},
     )
 
 
@@ -86,3 +86,5 @@ __all__ = [
     "handle_scrap_error",
     "handle_unexpected_error",
 ]
+
+

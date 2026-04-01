@@ -22,7 +22,7 @@ class EstadualRequest(BaseCndRequest):
     @classmethod
     def validate_uf(cls, v: str) -> str:
 
-        v = "".join(filter(str.isalpha, v)).upper()
+        v = "".join(filter(str.isalpha, v)).lower()
 
         if len(v) != 2:
             raise ValueError("UF deve conter exatamente 2 letras")
