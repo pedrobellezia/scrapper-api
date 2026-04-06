@@ -1,3 +1,5 @@
+from typing import Callable, Awaitable
+
 from playwright.async_api import (
     Page,
     BrowserContext,
@@ -5,16 +7,15 @@ from playwright.async_api import (
     Download,
 )
 import httpx
-from io import BytesIO
-from pypdf import PdfReader, PdfWriter
-from reportlab.lib.colors import white
-from reportlab.pdfgen import canvas
+
 from app.exceptions import ScrapError, CaptchaError
 from app.config import logger, CAPTCHA_API_KEY
 from app.utils.captcha_solver import CaptchaSolver
 from pathlib import Path
 import asyncio
 import random
+
+from app.utils.pdf_handler import add_cnpj
 
 
 class Municipal:
@@ -25,8 +26,8 @@ class Municipal:
         logger.info(f"Starting Municipal scrape for CNPJ: {cnpj}, {municipio}/{uf}")
 
         method_name = f"{uf}_{municipio}"
-
-        method = getattr(Municipal, method_name, None)
+        #tipagem pro pycharm parar de reclamar
+        method: Callable[..., Awaitable[bytes]] | None = getattr(Municipal, method_name, None)
 
         if not callable(method):
             return None
@@ -155,10 +156,10 @@ class Municipal:
             download_path = await download_info.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"Municipal SC/Florianopolis scrape completed for CNPJ: {cnpj}")
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -187,10 +188,10 @@ class Municipal:
             download_path = await download_info.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"Municipal SC/Lages scrape completed for CNPJ: {cnpj}")
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -221,12 +222,12 @@ class Municipal:
             download_path = await download_info.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(
                 f"Municipal SC/Braco do Norte scrape completed for CNPJ: {cnpj}"
             )
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -255,10 +256,10 @@ class Municipal:
             download_path = await download_info.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"Municipal SC/Criciuma scrape completed for CNPJ: {cnpj}")
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -299,11 +300,11 @@ class Municipal:
             popup = await popup_info.value
 
             await popup.emulate_media(media="print")
-            pdf_buffer = await popup.pdf(format="A4")
+            pdf_bytes = await popup.pdf(format="A4")
 
             logger.info(f"Municipal SC/Itapema scrape completed for CNPJ: {cnpj}")
 
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -350,11 +351,11 @@ class Municipal:
             download_path = await download.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"Municipal SC/Camboriu scrape completed for CNPJ: {cnpj}")
 
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -401,11 +402,11 @@ class Municipal:
                     f"Falha ao obter PDF Municipal SC/Joinville para {cnpj}, status code: {reponse.status_code}"
                 )
 
-            pdf_buffer = reponse.content
+            pdf_bytes = reponse.content
 
             logger.info(f"Municipal SC/Joinville scrape completed for CNPJ: {cnpj}")
 
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout
@@ -484,46 +485,12 @@ class Municipal:
             download_path = await download.path()
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = await add_cnpj(Path(download_path).read_bytes(), cnpj)
 
-            reader = PdfReader(BytesIO(pdf_buffer))
-            writer = PdfWriter()
-
-            for page in reader.pages:
-                # medidas do pdf
-                w, h = float(page.mediabox.width), float(page.mediabox.height)
-
-                # buffer temporario
-                overlay = BytesIO()
-
-                # criar canvas para o texto
-                c = canvas.Canvas(overlay, pagesize=(w, h))
-
-                # escrevo no canvas e salvo
-                c.setFillColor(white)
-                c.setFont("Helvetica-Bold", 1)
-                c.drawString(
-                    0,
-                    h - 1,
-                    f"SOLICITO PARA O AGENTE UTILIZAR ESTE CNPJ {cnpj}",
-                )
-                c.save()
-
-                # como overlay e um buffer tem que voltar pro inicio pra ler tudo
-                overlay.seek(0)
-
-                # jogo o overlay por cima da pagina original
-                page.merge_page(PdfReader(overlay).pages[0])
-
-                # adiciono a pagina modificada ao writer
-                writer.add_page(page)
-
-            out = BytesIO()
-            writer.write(out)
 
             logger.info(f"Municipal SP/Sao Paulo scrape completed for CNPJ: {cnpj}")
 
-            return out.getvalue()
+            return pdf_bytes
 
         except CaptchaError:
             raise
@@ -566,11 +533,11 @@ class Municipal:
             popup = await popup_info.value
 
             await popup.emulate_media(media="print")
-            pdf_buffer = await popup.pdf(format="A4")
+            pdf_bytes = await popup.pdf(format="A4")
 
             logger.info(f"Municipal SC/Icara scrape completed for CNPJ: {cnpj}")
 
-            return pdf_buffer
+            return pdf_bytes
 
         except PlaywrightTimeout as e:
             e: PlaywrightTimeout

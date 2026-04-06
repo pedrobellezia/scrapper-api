@@ -47,10 +47,10 @@ class Trabalhista:
                 raise ScrapError(
                     f"Falha ao obter PDF da certidao Trabalhista para {cnpj}"
                 )
-            pdf_buffer = Path(download_path).read_bytes()
+            pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"Trabalhista scrape completed for CNPJ: {cnpj}")
-            return pdf_buffer
+            return pdf_bytes
 
         except CaptchaError:
             raise
