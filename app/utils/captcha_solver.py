@@ -1,6 +1,6 @@
 import base64
 from urllib.parse import urlparse, parse_qs
-from playwright.async_api import Page
+from playwright.async_api import Page, expect
 from twocaptcha import AsyncTwoCaptcha
 from app.config import logger
 from typing import List
@@ -108,6 +108,7 @@ class CaptchaSolver:
 
     async def solve_normal(self, img_xpath, input_xpath):
         img_locator = self.page.locator(img_xpath)
+        await img_locator.first.wait_for(timeout=30_000)
         img_count = await img_locator.count()
         if img_count == 0:
             logger.error(
