@@ -1,12 +1,17 @@
 from starlette.requests import Request
-import secrets
 from starlette.responses import JSONResponse
+import secrets
+from typing import Callable, Awaitable
 from app.config.config import SECRET_KEY
 from app.config.log import logger
 
 
-async def auth(request: Request, call_next):
+async def auth(
+    request: Request, call_next: Callable[[Request], Awaitable]
+) -> JSONResponse | Awaitable:
+    """Middleware de autenticação via Bearer Token para requisições não-GET."""
     logger.info(f"Received request: {request.method} {request.url}")
+
     if request.method != "GET":
         auth_token = request.headers.get("Authorization")
 
@@ -25,6 +30,7 @@ async def auth(request: Request, call_next):
                 status_code=401,
                 content={"detail": "Token de autenticacao invalido"},
             )
+
     return await call_next(request)
 
 

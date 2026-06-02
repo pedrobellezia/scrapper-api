@@ -1,19 +1,20 @@
 [project]
-name = "teste"
+name = "scrapper-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "API para web scraping de dados públicos brasileiros"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "python-dotenv",
+    "python-dotenv>=1.0.0",
     "2captcha-python>=2.0.5",
-    "fastapi",
-    "playwright",
-    "pydantic",
-    "rich",
-    "uvicorn",
-    "python-multipart",
-    "reportlab>=4.4.10",
-    "pypdf>=6.9.2",
-    "playwright-stealth>=2.0.2",
+    "fastapi>=0.100.0",
+    "playwright>=1.40.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "uvicorn[standard]>=0.24.0",
+    "python-multipart>=0.0.6",
+    "reportlab>=4.0.0",
+    "pypdf>=4.0.0",
+    "playwright-stealth>=2.0.0",
+    "requests>=2.31.0",
 ]

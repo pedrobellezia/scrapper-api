@@ -3,6 +3,7 @@ from .config import (
     CAPTCHA_API_KEY,
     HEADLESS,
     PLAYWRIGHT_ARGS,
+    MAX_CONCURRENT_BROWSERS,
 )
 from .log import setup_logging, logger
 from .server_configs import add_routes, add_exceptions_handlers, add_middlewares
@@ -13,6 +14,7 @@ __all__ = [
     "CAPTCHA_API_KEY",
     "HEADLESS",
     "PLAYWRIGHT_ARGS",
+    "MAX_CONCURRENT_BROWSERS",
     "setup_logging",
     "logger",
     "add_routes",

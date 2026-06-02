@@ -15,5 +15,7 @@ async def estadual(data: EstadualRequest, tools=Depends(get_tools)):
         page=page, context=context, cnpj=data.cnpj, uf=data.uf
     )
     if not result:
-        return Response(content="UF não suportada.", media_type="text/plain", status_code=404)
+        return Response(
+            content="UF não suportada.", media_type="text/plain", status_code=404
+        )
     return Response(content=result, media_type="application/pdf")

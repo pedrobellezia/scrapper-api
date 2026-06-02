@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from starlette.middleware.cors import CORSMiddleware
+import os
 
 from app.exceptions import ScrapError
 from app.exceptions.handlers import (
@@ -30,9 +31,17 @@ def add_middlewares(app: FastAPI):
     from app.config.middlewares import auth
 
     app.middleware("http")(auth)
+
+    # CORS seguro: apenas origens especificadas (ou configuráveis via env)
+    allowed_origins = os.environ.get(
+        "ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:8000"
+    ).split(",")
+
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
-        allow_methods=["*"],
-        allow_headers=["*"],
+        allow_origins=[origin.strip() for origin in allowed_origins],
+        allow_methods=["GET", "POST"],
+        allow_headers=["Content-Type", "Authorization"],
+        allow_credentials=True,
+        max_age=600,
     )

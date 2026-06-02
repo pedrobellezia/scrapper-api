@@ -4,6 +4,8 @@ from typing import Any, Optional
 
 
 class AppBaseError(Exception):
+    """Classe base para todos os erros da aplicação."""
+
     status_code = 500
     error_code = "internal_error"
     default_message = "Ocorreu um erro interno."
@@ -23,17 +25,29 @@ class AppBaseError(Exception):
         super().__init__(self.message)
 
 
+class ConfigError(AppBaseError):
+    """Erro de configuração da aplicação."""
+
+    status_code = 500
+    error_code = "config_error"
+    default_message = "Erro de configuração da aplicação."
+
+
 class ScrapError(AppBaseError):
-    def __init__(self, *args, url: Optional[str] = None, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.url = url
+    """Erro durante o web scraping."""
 
     status_code = 502
     error_code = "scrap_error"
     default_message = "Houve um erro ao tentar realizar o scrap."
 
+    def __init__(self, *args, url: Optional[str] = None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.url = url
+
 
 class CaptchaError(ScrapError):
+    """Erro ao resolver CAPTCHA."""
+
     status_code = 502
     error_code = "captcha_error"
     default_message = "Houve um erro ao tentar resolver o CAPTCHA."

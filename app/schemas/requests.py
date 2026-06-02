@@ -4,6 +4,17 @@ from enum import Enum
 from datetime import datetime
 
 
+def _validate_cnpj(cnpj: str) -> str:
+    """Valida e limpa formato de CNPJ."""
+    # Remove caracteres não numéricos
+    cleaned = "".join(filter(str.isdigit, cnpj))
+
+    if len(cleaned) != 14:
+        raise ValueError("CNPJ deve conter exatamente 14 dígitos")
+
+    return cleaned
+
+
 class LogLevel(str, Enum):
     INFO = "INFO"
     WARNING = "WARNING"
@@ -13,6 +24,11 @@ class LogLevel(str, Enum):
 class BaseCndRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     cnpj: str
+
+    @field_validator("cnpj")
+    @classmethod
+    def validate_cnpj(cls, v: str) -> str:
+        return _validate_cnpj(v)
 
 
 class EstadualRequest(BaseCndRequest):

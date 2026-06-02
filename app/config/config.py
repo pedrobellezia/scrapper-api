@@ -18,11 +18,21 @@ PLAYWRIGHT_ARGS = [
 ]
 HEADLESS = os.environ.get("HEADLESS", "False").lower() == "true"
 
+# Configurações de Concorrência
+MAX_CONCURRENT_BROWSERS = int(os.environ.get("MAX_CONCURRENT_BROWSERS", "3"))
 
 # Validacoes obrigatorias
-if not all([SECRET_KEY, CAPTCHA_API_KEY]):
-    raise Exception(
-        "SECRET_KEY and CAPTCHA_API_KEY are required in environment variables"
+_missing_vars = []
+if not SECRET_KEY:
+    _missing_vars.append("SECRET_KEY")
+if not CAPTCHA_API_KEY:
+    _missing_vars.append("CAPTCHA_API_KEY")
+
+if _missing_vars:
+    missing = ", ".join(_missing_vars)
+    raise RuntimeError(
+        f"Variáveis de ambiente obrigatórias não configuradas: {missing}. "
+        f"Verifique o arquivo .env baseado em .env.example"
     )
 
 __all__ = [
@@ -30,4 +40,5 @@ __all__ = [
     "CAPTCHA_API_KEY",
     "HEADLESS",
     "PLAYWRIGHT_ARGS",
+    "MAX_CONCURRENT_BROWSERS",
 ]

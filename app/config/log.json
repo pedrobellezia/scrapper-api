@@ -11,18 +11,12 @@
       "rich_tracebacks": true,
       "tracebacks_show_locals": false,
       "markup": false
-    },
-    "jsonl": {
-      "class": "app.config.log.JsonlHandler",
-      "level": "WARNING",
-      "log_dir": "logs"
     }
   },
   "root": {
     "level": "WARNING",
     "handlers": [
-      "console",
-      "jsonl"
+      "console"
     ]
   },
   "loggers": {

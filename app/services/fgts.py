@@ -22,7 +22,7 @@ class Fgts:
 
             await page.wait_for_load_state("networkidle", timeout=20_000)
 
-            await page.locator("//a[@id='mainForm:j_id51']").click()
+            await page.locator("//span[@id='mainForm:linkCertificado']/a").click()
 
             await page.wait_for_load_state("networkidle", timeout=20_000)
 

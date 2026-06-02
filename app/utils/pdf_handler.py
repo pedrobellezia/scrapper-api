@@ -3,6 +3,7 @@ from pypdf import PdfReader, PdfWriter
 from reportlab.lib.colors import white
 from reportlab.pdfgen import canvas
 
+
 async def add_cnpj(pdf_bytes: bytes, cnpj: str) -> bytes:
     # pra quando o cnd n tem o cnpj completo
     reader = PdfReader(BytesIO(pdf_bytes))

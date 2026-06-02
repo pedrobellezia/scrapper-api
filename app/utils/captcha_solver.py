@@ -1,6 +1,6 @@
 import base64
 from urllib.parse import urlparse, parse_qs
-from playwright.async_api import Page, expect
+from playwright.async_api import Page
 from twocaptcha import AsyncTwoCaptcha
 from app.config import logger
 from typing import List

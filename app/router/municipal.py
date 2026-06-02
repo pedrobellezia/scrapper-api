@@ -15,7 +15,11 @@ async def municipal(
 ):
     page, context = tools
     result = await Municipal._execute_scrap(
-        page=page, context=context, cnpj=data.cnpj, uf=data.uf, municipio=data.municipio
+        page=page,
+        context=context,
+        cnpj=data.cnpj,
+        uf=data.uf.lower(),
+        municipio=data.municipio.lower(),
     )
 
     if not result:

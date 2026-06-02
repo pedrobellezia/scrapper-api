@@ -26,8 +26,10 @@ class Municipal:
         logger.info(f"Starting Municipal scrape for CNPJ: {cnpj}, {municipio}/{uf}")
 
         method_name = f"{uf}_{municipio}"
-        #tipagem pro pycharm parar de reclamar
-        method: Callable[..., Awaitable[bytes]] | None = getattr(Municipal, method_name, None)
+        # tipagem pro pycharm parar de reclamar
+        method: Callable[..., Awaitable[bytes]] | None = getattr(
+            Municipal, method_name, None
+        )
 
         if not callable(method):
             return None
@@ -391,9 +393,12 @@ class Municipal:
 
             await page.locator("//select[@id='ctp_codigo']").select_option(value="8")
 
+            old_url = page.url
+
             await page.locator("//input[contains(@value, 'Gerar cert')]").click()
 
-            await asyncio.sleep(1)
+            await page.wait_for_url(lambda current_url: current_url != old_url)
+
             url = page.url
 
             reponse = httpx.get(url)
@@ -486,7 +491,6 @@ class Municipal:
             if not download_path:
                 raise ScrapError(f"Falha ao obter PDF para {cnpj}")
             pdf_bytes = await add_cnpj(Path(download_path).read_bytes(), cnpj)
-
 
             logger.info(f"Municipal SP/Sao Paulo scrape completed for CNPJ: {cnpj}")
 

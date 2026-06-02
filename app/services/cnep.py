@@ -24,9 +24,7 @@ class Cnep:
             download = await download_info.value
             download_path = await download.path()
             if not download_path:
-                raise ScrapError(
-                    f"Falha ao obter PDF da certidao CNEP para {cnpj}"
-                )
+                raise ScrapError(f"Falha ao obter PDF da certidao CNEP para {cnpj}")
             pdf_bytes = Path(download_path).read_bytes()
 
             logger.info(f"CNEP scrape completed for CNPJ: {cnpj}")
